@@ -1,7 +1,7 @@
 # Smile and Mouth Detection using TFLite Models  
 
 ## Overview  
-This project implements a **smile and mouth detection system** using **TensorFlow Lite** models. The program processes an image or a live webcam feed, detects facial landmarks, and classifies whether the subject is **smiling or not** and whether their **mouth is open or closed**.  
+This project implements a **smile and mouth detection system** using **TensorFlow Lite** models. The program processes an image or a live webcam feed, detects facial landmarks, and classifies whether the subject is **smiling or not** and whether their **mouth is open or closed** using **C++**.  
 
 ## Features  
 - **Facial landmark detection** using a custom TFLite model.  
