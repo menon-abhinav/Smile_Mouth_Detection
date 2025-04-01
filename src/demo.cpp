@@ -29,7 +29,7 @@ cv::Mat cropMouthRegion(const cv::Mat &image, const std::vector<std::pair<float,
 int main(int argc, char* argv[]) {
     
     // Default values for the parameters
-    std::string imagePath = "../SmileMouth-PassportPhotos/2cd178fa9fad4f978e60cb797c169de7.jpg";  
+    std::string imagePath = "../../SmileMouth-PassportPhotos/2cd178fa9fad4f978e60cb797c169de7.jpg";  
     std::string classifier = "M";                 
     int landmarkCount = 40;                    
     float threshold = 0.1f;                      
@@ -67,15 +67,15 @@ int main(int argc, char* argv[]) {
     std::string modelPath;
     if (classifier == "M" || classifier == "m") {
         if (landmarkCount == 40) {
-            modelPath = "../models/best_model_cropped_mouth_40_lm_attention.tflite";
+            modelPath = "../../models/best_model_cropped_mouth_40_lm_attention.tflite";
         } else {
-            modelPath = "../models/best_model_cropped_mouth_124_lm_attention.tflite";
+            modelPath = "../../models/best_model_cropped_mouth_124_lm_attention.tflite";
         }
     } else { 
         if (landmarkCount == 40) {
-            modelPath = "../models/best_model_whole_face_40_lm_attention.tflite";
+            modelPath = "../../models/best_model_whole_face_40_lm_attention.tflite";
         } else {
-            modelPath = "../models/best_model_whole_face_124_lm_attention.tflite";
+            modelPath = "../../models/best_model_whole_face_124_lm_attention.tflite";
         }
     }
 
@@ -85,7 +85,7 @@ int main(int argc, char* argv[]) {
     std::cout << "Model Path: " << modelPath << std::endl;
 
     // Create and Load the FaceLandmark object and the classifier TFlite model.
-    my::FaceLandmark faceLandmarker("../models");
+    my::FaceLandmark faceLandmarker("../../models");
 
     std::unique_ptr<tflite::FlatBufferModel> model = tflite::FlatBufferModel::BuildFromFile(modelPath.c_str());
     if (!model) {
@@ -225,10 +225,17 @@ void processImage(const cv::Mat& image, my::FaceLandmark& faceLandmarker,
     // Render raw landmarks on the original frame.
     auto raw_landmarks = faceLandmarker.getAllFaceLandmarks();
     for (const auto& landmark : raw_landmarks) {
-        cv::circle(rframe, landmark, 2, cv::Scalar(0, 255, 0), -1);
+        cv::circle(rframe, landmark, 4, cv::Scalar(0, 255, 0), -1);
     }
-    cv::putText(rframe, resultText, cv::Point(20, 70), cv::FONT_HERSHEY_PLAIN, 3, cv::Scalar(0, 196, 255), 2);
+    cv::putText(rframe, resultText, cv::Point(20, 120), cv::FONT_HERSHEY_SIMPLEX, 3, cv::Scalar(34, 139, 34), 4, cv::LINE_AA);
     cv::imshow("Face Detector", rframe);
+
+    // auto raw_landmarks = faceLandmarker.getAllFaceLandmarks();
+    // for (const auto& landmark : raw_landmarks) {
+    //     cv::circle(rframe, landmark, 3, cv::Scalar(0, 255, 0), -1);
+    // }
+    // cv::putText(rframe, resultText, cv::Point(20, 60), cv::FONT_HERSHEY_SIMPLEX, 0, cv::Scalar(34, 139, 34), 2, cv::LINE_AA);
+    // cv::imshow("Face Detector", rframe);
 }
 
 
